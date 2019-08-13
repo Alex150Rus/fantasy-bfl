@@ -15,7 +15,7 @@ const pool = new Pool({
 app.get('/db', async (req, res) => {
   try {
     const client = await pool.connect()
-    const result = await client.query('SELECT * FROM test_table');
+    const result = await client.query('SELECT * FROM news');
     const results = { 'results': (result) ? result.rows : null};
     res.render('pages/db', results );
     client.release();
@@ -25,9 +25,11 @@ app.get('/db', async (req, res) => {
   }
 })
 
-let port = process.env.PORT || 8080;
+app.listen(process.env.PORT);
 
-app.listen(port, function() {
-  console.log('Our app is running on http://localhost:' + port);
-});
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8000;
+}
+app.listen(port);
 
