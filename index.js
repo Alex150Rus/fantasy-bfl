@@ -12,10 +12,10 @@ const pool = new Pool({
   ssl: true
 });
 
-app.get('/db', async (req, res) => {
+app.get('/newsadd', async (req, res) => {
   try {
     const client = await pool.connect()
-    const result = await client.query("INSERT INTO news(news_date, title, text) VALUES ('2019-08-14', 'Краснодар разгромил Порту', 'Краснодар одержал неожиданную победу в Португалии и вышел в следующий раунд ЛЧ');");
+    const result = await client.query("INSERT INTO news(news_date, title, text) VALUES ('2019-08-14', 'Локомотив близок к лёгкой группе в ЛЧ. Свежая таблица коэффициентов УЕФА', 'Москвичам помог массовый вылет фаворитов из Лиги чемпионов. У России есть прекрасный шанс проявить себя в главном турнире Европы.');");
     const results = { 'results': (result) ? result.rows : null};
     res.send(results);
     client.release();
