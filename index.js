@@ -5,7 +5,7 @@ const cors = require('cors')
 
 app.use(bodyParser.json());
 //обязательно ограничивать домены
-app.use(cors({origin: ['https://intense-plains-62231.herokuapp.com/']}));
+app.use(cors({origin: ['https://intense-plains-62231.herokuapp.com']}));
 
 
 app.get('/users', (request, response) => {
@@ -95,6 +95,19 @@ app.get('/teams', async (req, res) => {
   try {
     const client = await pool.connect()
     const result = await client.query("SELECT * FROM teams;");
+    const results = { 'teams': (result) ? result.rows : null};
+    res.send(results);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+})
+
+app.get('/league_table', async (req, res) => {
+  try {
+    const client = await pool.connect()
+    const result = await client.query("SELECT * FROM league_table;");
     const results = { 'teams': (result) ? result.rows : null};
     res.send(results);
     client.release();
