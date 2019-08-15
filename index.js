@@ -107,7 +107,7 @@ app.get('/teams', async (req, res) => {
 app.get('/league-table', async (req, res) => {
   try {
     const client = await pool.connect()
-    const result = await client.query("SELECT team, games_played, wins, draws, looses, goales_scored, goales_missed, points FROM league_table lt INNER JOIN teams ON teams.id = lt.team_id;");
+    const result = await client.query("SELECT team_id, team, games_played, wins, draws, looses, goales_scored, goales_missed, points FROM league_table lt INNER JOIN teams ON teams.id = lt.team_id;");
     const results = { 'league table': (result) ? result.rows : null};
     res.send(results);
     client.release();
