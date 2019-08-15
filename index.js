@@ -3,7 +3,6 @@ const express = require('express');
 const app = express();
 const cors = require('cors')
 
-const app = express();
 app.use(bodyParser.json());
 //обязательно ограничивать домены
 app.use(cors({origin: ['https://intense-plains-62231.herokuapp.com/']}));
