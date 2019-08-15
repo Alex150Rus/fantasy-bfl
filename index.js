@@ -1,6 +1,13 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
+const cors = require('cors')
+
+const app = express();
+app.use(bodyParser.json());
+//обязательно ограничивать домены
+app.use(cors({origin: ['https://intense-plains-62231.herokuapp.com/']}));
+
 
 app.get('/users', (request, response) => {
   response.send('Hello user!');
@@ -37,7 +44,7 @@ app.get('/news', async (req, res) => {
     const client = await pool.connect()
     const result = await client.query("SELECT * FROM news;");
     const results = { 'results': (result) ? result.rows : null};
-    res.send(results);
+    res.json(results);
     client.release();
   } catch (err) {
     console.error(err);
