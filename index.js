@@ -9,7 +9,7 @@ app.use(cors({origin: ['https://intense-plains-62231.herokuapp.com/']}));
 
 
 app.get('/users', (request, response) => {
-  response.send('Hello user!');
+  response.json('Hello user!');
 })
 
 const { Pool } = require('pg');
@@ -30,7 +30,7 @@ app.get('/newsadd', async (req, res) => {
       ('2019-08-14', '22 пенальти в Копенгагене. Упрямее оказались сербы', 'Двум игрокам пришлось выходить к 11-метровой отметке по два раза. Об этом и другом – в обзоре новостей дня.')
       ;`);
     const results = { 'results': (result) ? result.rows : null};
-    res.send(results);
+    res.json(results);
     client.release();
   } catch (err) {
     console.error(err);
