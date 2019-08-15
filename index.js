@@ -5,7 +5,7 @@ const cors = require('cors')
 
 app.use(bodyParser.json());
 //обязательно ограничивать домены
-app.use(cors({origin: ['https://intense-plains-62231.herokuapp.com']}));
+app.use(cors({origin: ['*']}));
 
 
 app.get('/users', (request, response) => {
