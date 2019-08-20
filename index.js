@@ -5,7 +5,7 @@ const cors = require('cors')
 
 app.use(bodyParser.json());
 //обязательно ограничивать домены
-app.use(cors({origin: ['*']}));
+app.use(cors({origin: true}));
 
 
 app.get('/users', (request, response) => {
