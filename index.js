@@ -1,4 +1,3 @@
-const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 const cors = require('cors')
@@ -10,10 +9,11 @@ const news = require('./routes/news')
 const leagueTable = require('./routes/league-table')
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
 //обязательно ограничивать домены
 app.use(cors({origin: true}));
 
-app.use(bodyParser.json());
+
 
 app.use('/users', users);
 app.use('/teams', teams);
