@@ -2,6 +2,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 const cors = require('cors')
+const bodyParser = require('body-parser');
 
 const users = require('./routes/users')
 const teams = require('./routes/teams')
@@ -11,6 +12,8 @@ const leagueTable = require('./routes/league-table')
 app.use(bodyParser.json());
 //обязательно ограничивать домены
 app.use(cors({origin: true}));
+
+app.use(bodyParser.json());
 
 app.use('/users', users);
 app.use('/teams', teams);
