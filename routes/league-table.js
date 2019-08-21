@@ -8,7 +8,7 @@ const pool = new Pool({
 });
 
 
-router.get('/league-table', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const client = await pool.connect()
     const result = await client.query("SELECT team_id, team, games_played, wins, draws, looses, goales_scored, goales_missed, points FROM league_table lt INNER JOIN teams ON teams.id = lt.team_id;");
