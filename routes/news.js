@@ -38,9 +38,9 @@ router.post('/create', async (req, res) => {
   }
 })
 
-router.post('/:id', async (req, res) => {
+router.post('/delete', async (req, res) => {
   try {
-    const id = req.params.id;
+    const id = req.body.id;
     const client = await pool.connect()
     const result = await client.query("DELETE FROM news WHERE id=($id)", [id]);
     const results = { 'results': (result) ? result.rowCount : null};
