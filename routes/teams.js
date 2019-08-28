@@ -43,6 +43,7 @@ router.get('/teamadd', async (req, res) => {
     res.json(results);
     client.release();
   } catch (err) {
+    client.release();
     console.error(err);
     res.send("Error " + err);
   }
@@ -56,6 +57,7 @@ router.get('/', async (req, res) => {
     res.send(results);
     client.release();
   } catch (err) {
+    client.release();
     console.error(err);
     res.send("Error " + err);
   }

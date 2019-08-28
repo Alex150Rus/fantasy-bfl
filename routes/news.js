@@ -32,6 +32,22 @@ router.post('/create', async (req, res) => {
     res.send(results);
     client.release();
   } catch (err) {
+    client.release();
+    console.error(err);
+    res.send("Error " + err);
+  }
+})
+
+router.delete('/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const client = await pool.connect()
+    const result = await client.query("DELETE FROM news WHERE id=($id)", [id]);
+    const results = { 'results': (result) ? result.rowCount : null};
+    res.send(results);
+    client.release();
+  } catch (err) {
+    client.release();
     console.error(err);
     res.send("Error " + err);
   }
@@ -46,6 +62,7 @@ router.get('/:id', async (req, res) => {
     res.send(results);
     client.release();
   } catch (err) {
+    client.release();
     console.error(err);
     res.send("Error " + err);
   }
@@ -85,6 +102,7 @@ router.get('/newsadd', async (req, res) => {
     res.json(results);
     client.release();
   } catch (err) {
+    client.release();
     console.error(err);
     res.send("Error " + err);
   }
@@ -98,6 +116,7 @@ router.get('/newsdel', async (req, res) => {
     res.send(results);
     client.release();
   } catch (err) {
+    client.release();
     console.error(err);
     res.send("Error " + err);
   }
