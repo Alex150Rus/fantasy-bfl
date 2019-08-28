@@ -41,7 +41,7 @@ router.post('/delete', async (req, res) => {
   try {
     const id = req.body.id;
     const client = await pool.connect()
-    const result = await client.query("DELETE FROM news WHERE id=($id)", [id]);
+    const result = await client.query("DELETE FROM news WHERE id=($1)", [id]);
     const results = { 'results': (result) ? result.rows : null};
     res.send(results);
     client.release();
