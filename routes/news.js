@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
+const {db_url} = require('./../config')
+
 const { Pool } = require('pg');
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: db_url,
   ssl: true
 });
 
