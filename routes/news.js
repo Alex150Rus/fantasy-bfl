@@ -32,7 +32,6 @@ router.post('/create', async (req, res) => {
     res.send(results);
     client.release();
   } catch (err) {
-    client.release();
     console.error(err);
     res.send("Error " + err);
   }
@@ -47,7 +46,6 @@ router.post('/delete', async (req, res) => {
     res.send(results);
     client.release();
   } catch (err) {
-    client.release();
     console.error(err);
     res.send("Error " + err);
   }
@@ -62,7 +60,6 @@ router.get('/:id', async (req, res) => {
     res.send(results);
     client.release();
   } catch (err) {
-    client.release();
     console.error(err);
     res.send("Error " + err);
   }
@@ -102,7 +99,6 @@ router.get('/newsadd', async (req, res) => {
     res.json(results);
     client.release();
   } catch (err) {
-    client.release();
     console.error(err);
     res.send("Error " + err);
   }
@@ -116,7 +112,6 @@ router.get('/newsdel', async (req, res) => {
     res.send(results);
     client.release();
   } catch (err) {
-    client.release();
     console.error(err);
     res.send("Error " + err);
   }

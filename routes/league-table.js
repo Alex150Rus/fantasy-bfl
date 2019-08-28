@@ -16,7 +16,6 @@ router.get('/', async (req, res) => {
     res.send(results);
     client.release();
   } catch (err) {
-    client.release();
     console.error(err);
     res.send("Error " + err);
   }
@@ -57,7 +56,6 @@ router.get('/league-table/insert', async (req, res) => {
     res.send(results);
     client.release();
   } catch (err) {
-    client.release();
     console.error(err);
     res.send("Error " + err);
   }
