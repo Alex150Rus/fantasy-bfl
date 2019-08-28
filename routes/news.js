@@ -22,8 +22,8 @@ router.get('/', async (req, res) => {
 
 router.post('/create', async (req, res) => {
   try {
-    const data = { news_date : req.body.params.news_date, title: req.body.params.title, text = req.body.params.text,
-       imgFileName: req.body.params.imgFileName }
+    const data = { news_date: req.body.news_date, title: req.body.title, text: req.body.text,
+       imgFileName: req.body.imgFileName }
 
     const client = await pool.connect()
     const result = await client.query("INSERT INTO news(news_date, title, text, imgFileName VALUES($1, $2, $3, $4));", [
