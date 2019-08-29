@@ -9,11 +9,8 @@ const news = require('./routes/news')
 const leagueTable = require('./routes/league-table')
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
 //обязательно ограничивать домены
 app.use(cors({origin: true}));
-
-
 
 app.use('/users', users);
 app.use('/teams', teams);
@@ -25,5 +22,6 @@ let port = process.env.PORT;
 if (port == null || port == "") {
   port = 8000;
 }
+console.log(`server running at: http://localhost:${port}/`);
 app.listen(port);
 

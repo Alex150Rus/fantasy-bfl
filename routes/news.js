@@ -65,6 +65,30 @@ router.get('/:id', async (req, res) => {
   }
 })
 
+router.put('/:id', async (req, res) => {
+  const result =[];
+  try {
+    const id = req.params.id;
+    const data = { news_date: req.body.news_date, title: req.body.title, text: req.body.text,
+      imgFileName: req.body.imgFileName }
+    const client = await pool.connect()
+    const result = await client.query("UPDATE news SET news_date=($1), title=($2), text=($3), imgFileName=($4) WHERE id = ($5);",
+    [data.news_date, data.title, data,text, data.imgFileName,id]);
+
+    const query = client.query('SELECT * FROM news where id=($1);', [id]);
+    query.on('row', (row) => {
+      result.push(row);
+    });
+    query.on('end', function() {
+    res.send(result); 
+    client.release();
+    });
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+})
+
 router.get('/newsadd', async (req, res) => {
   try {
     const client = await pool.connect()
