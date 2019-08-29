@@ -73,7 +73,7 @@ router.put('/:id', async (req, res) => {
       imgFileName: req.body.imgFileName }
     const client = await pool.connect()
     const result = await client.query("UPDATE news SET news_date=($1), title=($2), text=($3), imgFileName=($4) WHERE id = ($5);",
-    [data.news_date, data.title, data,text, data.imgFileName,id]);
+    [data.news_date, data.title, data.text, data.imgFileName,id]);
 
     const query = client.query('SELECT * FROM news where id=($1);', [id]);
     query.on('row', (row) => {
