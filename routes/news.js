@@ -75,7 +75,7 @@ router.put('/:id', async (req, res) => {
     const result = await client.query("UPDATE news SET news_date=($1), title=($2), text=($3), imgFileName=($4) WHERE id = ($5);",
     [data.news_date, data.title, data.text, data.imgFileName,id]);
 
-    const results = { 'results': (result) ? result : null};
+    const results = { 'results': (result) ? result.rowCount : null};
     res.send(results);
     client.release();
   } catch (err) {
