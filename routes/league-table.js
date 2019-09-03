@@ -21,6 +21,19 @@ router.get('/', async (req, res) => {
   }
 })
 
+router.get('/bd', async (req, res) => {
+  try {
+    const client = await pool.connect()
+    const result = await client.query("SELECT * FROM league_table;");
+    const results = { 'league table': (result) ? result.rows : null};
+    res.send(results);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+})
+
 router.post('/create', async (req, res) => {
   try {
     const data = { team_id : req.body.team_id, games_played : req.body.games_played, wins : req.body.wins, draws : req.body.draws,
