@@ -11,7 +11,7 @@ const pool = new Pool({
 router.get('/', async (req, res) => {
   try {
     const client = await pool.connect()
-    const result = await client.query("SELECT team_id, team, games_played, wins, draws, looses, goales_scored, goales_missed, points FROM league_table lt INNER JOIN teams ON teams.id = lt.team_id ORDER BY points DESC;");
+    const result = await client.query("SELECT id, team_id, team, games_played, wins, draws, looses, goales_scored, goales_missed, points FROM league_table lt INNER JOIN teams ON teams.id = lt.team_id ORDER BY points DESC;");
     const results = { 'league table': (result) ? result.rows : null};
     res.send(results);
     client.release();
