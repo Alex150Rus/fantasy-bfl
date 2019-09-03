@@ -86,7 +86,7 @@ router.put('/:id', async (req, res) => {
     const data = { team_id : req.body.team_id, games_played : req.body.games_played, wins : req.body.wins, draws : req.body.draws,
       looses : req.body.looses, goales_scored : req.body.goales_scored, goales_missed : req.body.goales_missed, points : req.body.points }
     const client = await pool.connect()
-    const result = await client.query("UPDATE league_table SET team_id = ($1), games_played = ($2), wins = ($3), draws = ($4), looses = ($5), goales_scored = ($6), goales_missed = ($7), points = ($8)) WHERE id = ($9);",
+    const result = await client.query("UPDATE league_table SET team_id = ($1), games_played = ($2), wins = ($3), draws = ($4), looses = ($5), goales_scored = ($6), goales_missed = ($7), points = ($8) WHERE id = ($9);",
     [req.body.team_id, req.body.games_played, req.body.wins, req.body.draws, req.body.looses, req.body.goales_scored, req.body.goales_missed,  req.body.points, req.params.id]);
 
     const results = { 'results': (result) ? result.rowCount : null};
