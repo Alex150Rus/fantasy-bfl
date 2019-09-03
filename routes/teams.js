@@ -91,5 +91,22 @@ router.post('/delete', async (req, res) => {
   }
 })
 
+router.put('/:id', async (req, res) => {
+  const result =[];
+  try {
+    const id = req.params.id;
+    const data = { team: req.body.team}
+    const client = await pool.connect()
+    const result = await client.query("UPDATE teams SET team=($1), WHERE id = ($2);",
+    [team, id]);
+
+    const results = { 'team': (result) ? result.rowCount : null};
+    res.send(results);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+})
 
 module.exports = router;
