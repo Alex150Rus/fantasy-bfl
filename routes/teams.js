@@ -97,7 +97,7 @@ router.put('/:id', async (req, res) => {
     const id = req.params.id;
     const team =  req.body.team;
     const client = await pool.connect()
-    const result = await client.query("UPDATE teams SET team=($1), WHERE id = ($2);",
+    const result = await client.query("UPDATE teams SET team=($1) WHERE id = ($2);",
     [team, id]);
 
     const results = { 'team': (result) ? result.rowCount : null};
