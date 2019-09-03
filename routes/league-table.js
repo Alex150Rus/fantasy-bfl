@@ -56,7 +56,7 @@ router.get('/:id', async (req, res) => {
   try {
     const id = req.params.id;
     const client = await pool.connect()
-    const result = await client.query("SELECT * FROM laegue_table WHERE id = ($1);", [id]);
+    const result = await client.query("SELECT * FROM league_table WHERE id = ($1);", [id]);
     const results = { 'results': (result) ? result.rows : null};
     res.send(results);
     client.release();

@@ -61,4 +61,21 @@ router.get('/', async (req, res) => {
   }
 })
 
+router.post('/create', async (req, res) => {
+  try {
+    const data = { team : req.body.team}
+
+    const client = await pool.connect()
+    const result = await client.query("INSERT INTO teams(team) values($1)", 
+    [req.body.team]);
+    const results = { 'teams': (result) ? result.rows : null};
+    res.send(results);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+})
+
+
 module.exports = router;
