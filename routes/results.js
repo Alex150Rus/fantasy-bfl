@@ -10,7 +10,7 @@ const pool = new Pool({
 router.get('/', async (req, res) => {
   try {
     const client = await pool.connect()
-    const result = await client.query("SELECT results.id, date, weekday, time, year, guestTeamId, homeTeamGoals, guestTeamGoals FROM results INNER JOIN teams ON teams.id = results.guestTeamId;");
+    const result = await client.query("SELECT results.id, date, weekday, time, year, team, homeTeamGoals, guestTeamGoals FROM results INNER JOIN teams ON teams.id = results.guestTeamId;");
     const results = { 'results': (result) ? result.rows : null};
     res.send(results);
     client.release();
@@ -82,7 +82,7 @@ router.put('/:id', async (req, res) => {
     const id = req.params.id;
     const data = { date: req.body.date, weekday: req.body.weekday, time: req.body.time, year: req.body.year, homeTeamId: req.body.homeTeamId, guestTeamId: req.body.guestTeamId, homeTeamGoals: req.body.homeTeamGoals, guestTeamGoals: req.body.guestTeamGoals }
     const client = await pool.connect()
-    const result = await client.query("UPDATE results SET date=($1), weekday=($2), time=($3), year=($4), homeTeamId=($5), guestTeamId=($6), homeTeamGoals=($7), guestTeamGoal=($8) WHERE id = ($9);",
+    const result = await client.query("UPDATE results SET date=($1), weekday=($2), time=($3), year=($4), homeTeamId=($5), guestTeamId=($6), homeTeamGoals=($7), guestTeamGoals=($8) WHERE id = ($9);",
     [data.date, data.weekday, data.time, data.year, data.homeTeamId, data.guestTeamId, data.homeTeamGoals, data.guestTeamGoals, id]);
 
     const results = { 'results': (result) ? result.rowCount : null};
