@@ -10,7 +10,7 @@ const pool = new Pool({
 router.get('/', async (req, res) => {
   try {
     const client = await pool.connect()
-    const result = await client.query("SELECT results.id, date, weekday, time, year, homeTeamGoals, guestTeamGoals FROM results INNER JOIN teams ON teams.id = results.guestTeamId INNER JOIN teams.id = results.homeTeamId;");
+    const result = await client.query("SELECT results.id, date, weekday, time, year, homeTeamGoals, guestTeamGoals FROM results INNER JOIN teams ON teams.id = results.guestTeamId INNER JOIN teams ON teams.id = results.homeTeamId;");
     const results = { 'results': (result) ? result.rows : null};
     res.send(results);
     client.release();
@@ -40,6 +40,19 @@ router.post('/delete', async (req, res) => {
     const id = req.body.id;
     const client = await pool.connect()
     const result = await client.query("DELETE FROM results WHERE id=($1)", [id]);
+    const results = { 'results': (result) ? result.rows : null};
+    res.send(results);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+})
+
+router.get('/bd', async (req, res) => {
+  try {
+    const client = await pool.connect()
+    const result = await client.query("SELECT * FROM results;");
     const results = { 'results': (result) ? result.rows : null};
     res.send(results);
     client.release();
