@@ -76,6 +76,21 @@ router.get('/:id', async (req, res) => {
   }
 })
 
+router.get('/:date/:year', async (req, res) => {
+  try {
+    const date = req.params.date;
+    const year = req.params.year;
+    const client = await pool.connect()
+    const result = await client.query("SELECT * FROM results WHERE date = ($1) AND year = ($2);", [date, year]);
+    const results = { 'results': (result) ? result.rows : null};
+    res.send(results);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+})
+
 router.put('/:id', async (req, res) => {
   const result =[];
   try {
