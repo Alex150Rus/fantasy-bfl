@@ -10,7 +10,7 @@ const pool = new Pool({
 router.get('/', async (req, res) => {
   try {
     const client = await pool.connect()
-    const result = await client.query("SELECT results.id, date, weekday, time, year, team as guestTeam, team as homeTeamId, homeTeamGoals, guestTeamGoals FROM results INNER JOIN teams ON teams.id = results.guestTeamId INNER JOIN teams ON teams.id = results.homeTeamId;");
+    const result = await client.query("SELECT results.id, date, weekday, time, year, team as guestTeam, team as homeTeamId, homeTeamGoals, guestTeamGoals FROM results INNER JOIN teams ON (teams.id = results.guestTeamId or teams.id = results.homeTeamId);");
     const results = { 'results': (result) ? result.rows : null};
     res.send(results);
     client.release();
