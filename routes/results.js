@@ -62,11 +62,13 @@ router.get('/bd', async (req, res) => {
   }
 })
 
-router.get('/:id', async (req, res) => {
+
+router.get('/:date/:year', async (req, res) => {
   try {
-    const id = req.params.id;
+    const date = req.params.date;
+    const year = req.params.year;
     const client = await pool.connect()
-    const result = await client.query("SELECT * FROM results WHERE id = ($1);", [id]);
+    const result = await client.query("SELECT * FROM results WHERE date = ($1) AND year = ($2);", [date, year]);
     const results = { 'results': (result) ? result.rows : null};
     res.send(results);
     client.release();
@@ -76,12 +78,11 @@ router.get('/:id', async (req, res) => {
   }
 })
 
-router.get('/:date/:year', async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
-    const date = req.params.date;
-    const year = req.params.year;
+    const id = req.params.id;
     const client = await pool.connect()
-    const result = await client.query("SELECT * FROM results WHERE date = ($1) AND year = ($2);", [date, year]);
+    const result = await client.query("SELECT * FROM results WHERE id = ($1);", [id]);
     const results = { 'results': (result) ? result.rows : null};
     res.send(results);
     client.release();
