@@ -10,7 +10,7 @@ const pool = new Pool({
 router.get('/', async (req, res) => {
   try {
     const client = await pool.connect()
-    const result = await client.query("SELECT results.id, date, weekday, time, year, homeTeamGoals, guestTeamGoals FROM result INNER JOIN teams ON teams.id = results.guestTeamId INNER JOIN teams.id = results.homeTeamId;");
+    const result = await client.query("SELECT results.id, date, weekday, time, year, homeTeamGoals, guestTeamGoals FROM results INNER JOIN teams ON teams.id = results.guestTeamId INNER JOIN teams.id = results.homeTeamId;");
     const results = { 'results': (result) ? result.rows : null};
     res.send(results);
     client.release();
@@ -81,11 +81,11 @@ router.put('/:id', async (req, res) => {
   }
 })
 
-router.get('/db', async (req, res) => {
+router.get('/bd', async (req, res) => {
   try {
     const client = await pool.connect()
     const result = await client.query("SELECT * FROM results;");
-    const results = { 'league table': (result) ? result.rows : null};
+    const results = { 'results': (result) ? result.rows : null};
     res.send(results);
     client.release();
   } catch (err) {
