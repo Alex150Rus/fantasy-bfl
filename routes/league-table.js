@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
   try {
     const client = await pool.connect()
     const result = await client.query("SELECT lt.id, team_id, team, games_played, wins, draws, looses, goales_scored, goales_missed, points FROM league_table lt INNER JOIN teams ON teams.id = lt.team_id ORDER BY points DESC;");
-    const results = { 'league table': (result) ? result.rows : null};
+    const results = { 'league_table': (result) ? result.rows : null};
     res.send(results);
     client.release();
   } catch (err) {
@@ -25,7 +25,7 @@ router.get('/bd', async (req, res) => {
   try {
     const client = await pool.connect()
     const result = await client.query("SELECT * FROM league_table;");
-    const results = { 'league table': (result) ? result.rows : null};
+    const results = { 'league_table': (result) ? result.rows : null};
     res.send(results);
     client.release();
   } catch (err) {
@@ -129,7 +129,7 @@ router.get('/league-table/insert', async (req, res) => {
       (23, 0, 0, 0, 0, 0, 0, 0),
       (24, 0, 0, 0, 0, 0, 0, 0)
       ;`);
-    const results = { 'league table': (result) ? result.rows : null};
+    const results = { 'league_table': (result) ? result.rows : null};
     res.send(results);
     client.release();
   } catch (err) {
