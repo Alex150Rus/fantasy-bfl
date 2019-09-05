@@ -66,7 +66,7 @@ router.get('/bd', async (req, res) => {
 router.get('/:date/:year', async (req, res) => {
   try {
     const date = req.params.date;
-    const year = req.params.year;
+    const year = (req.params.year).replace('-', ' ');
     const client = await pool.connect()
     const result = await client.query("SELECT * FROM results WHERE date = ($1) AND year = ($2);", [date, year]);
     const results = { 'results': (result) ? result.rows : null};
