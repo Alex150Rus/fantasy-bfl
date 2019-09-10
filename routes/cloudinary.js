@@ -3,7 +3,6 @@ const cloudinary = require('cloudinary');
 const multer = require("multer");
 const cloudinaryStorage = require("multer-storage-cloudinary");
 const dotenv = require('dotenv');
-const bodyParser = require('body-parser');
 const router = express.Router();
 
 dotenv.config();
@@ -30,7 +29,7 @@ router.get('/', function(req, res) {
 
 router.post('/', parser.single("image"), (req, res) => {
  console.log(req.file)
- res.send(req.file.url); // to see what is returned to you
+ res.send({url: req.file.url}); 
 });
 
 module.exports = router;
