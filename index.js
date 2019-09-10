@@ -3,6 +3,9 @@ const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const cloudinary = require('cloudinary');
+const multer = require("multer");
+const cloudinaryStorage = require("multer-storage-cloudinary");
+const dotenv = require('dotenv');
 
 const users = require('./routes/users');
 const teams = require('./routes/teams');
@@ -10,9 +13,6 @@ const news = require('./routes/news');
 const results = require('./routes/results');
 const leagueTable = require('./routes/league-table');
 
-const multer = require("multer");
-const cloudinaryStorage = require("multer-storage-cloudinary");
-const dotenv = require('dotenv');
 dotenv.config();
 cloudinary.config({ 
   cloud_name: process.env.cloud_name, 
