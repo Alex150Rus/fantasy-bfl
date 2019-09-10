@@ -4,9 +4,9 @@ const fs = require('fs');
 
 const cloudinary = require('cloudinary');
 
-// var app = express.createServer(express.logger());
+const app = express.createServer(express.logger());
 
-router.get('/', function(req, res) {
+router.app.get('/', function(req, res) {
   res.send('<form method="post" enctype="multipart/form-data">'
     + '<p>Public ID: <input type="text" name="title"/></p>'
     + '<p>Image: <input type="file" name="image"/></p>'
@@ -14,7 +14,7 @@ router.get('/', function(req, res) {
     + '</form>');
 });
 
-router.post('/', function(req, res, next) {
+router.app.post('/', function(req, res, next) {
   stream = cloudinary.uploader.upload_stream(function(result) {
     console.log(result);
     res.send('Done:<br/> <img src="' + result.url + '"/><br/>' +
