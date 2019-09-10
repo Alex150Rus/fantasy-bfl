@@ -8,6 +8,7 @@ const teams = require('./routes/teams');
 const news = require('./routes/news');
 const results = require('./routes/results');
 const leagueTable = require('./routes/league-table');
+const cloudinary = require('./routes/cloudinary')
 
 app.use(bodyParser.json());
 //обязательно ограничивать домены
@@ -18,6 +19,7 @@ app.use('/teams', teams);
 app.use('/news', news);
 app.use('/results', results);
 app.use('/league-table', leagueTable);
+app.use('/cloudinary', cloudinary);
 
 
 let port = process.env.PORT;
