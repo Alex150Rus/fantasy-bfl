@@ -20,7 +20,7 @@ const storage = cloudinaryStorage({
   const parser = multer({ storage: storage });
 
 router.get('/', function(req, res) {
-  res.send('<form method="post" action="/cloudinary" enctype="multipart/form-data">'
+  res.send('<form method="post" enctype="multipart/form-data">'
     + '<p>Image: <input type="file" name="image"/></p>'
     + '<p><input type="submit"></p>'
     + '</form>');
