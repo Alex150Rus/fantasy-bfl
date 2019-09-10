@@ -19,7 +19,7 @@ const storage = cloudinaryStorage({
   });
   const parser = multer({ storage: storage });
 
-router.get('/cloudinary', function(req, res) {
+router.get('/', function(req, res) {
   res.send('<form method="post" enctype="multipart/form-data">'
     + '<p>Public ID: <input type="text" name="title"/></p>'
     + '<p>Image: <input type="file" name="image"/></p>'
@@ -27,7 +27,7 @@ router.get('/cloudinary', function(req, res) {
     + '</form>');
 });
 
-router.post('/cloudinary', parser.single("image"), (req, res) => {
+router.post('/', parser.single("image"), (req, res) => {
   res.send(req.file) // to see what is returned to you
   // 
 });
