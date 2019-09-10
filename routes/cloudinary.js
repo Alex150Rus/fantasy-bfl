@@ -28,7 +28,7 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', parser.single("image"), (req, res) => {
- res.send('ок'); 
+ res.send({url: req.file.url}); 
 });
 
 module.exports = router;
