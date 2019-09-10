@@ -19,7 +19,7 @@ app.use('/teams', teams);
 app.use('/news', news);
 app.use('/results', results);
 app.use('/league-table', leagueTable);
-express.createServer().use('/cloudinary', cloudinary);
+app.use('/cloudinary', cloudinary);
 
 
 let port = process.env.PORT;
