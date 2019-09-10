@@ -35,7 +35,7 @@ app.get('/cloudinary', function(req, res) {
     + '</form>');
 });
 
-router.post('/cloudinary', parser.single("image"), (req, res) => {
+app.post('/cloudinary', parser.single("image"), (req, res) => {
  console.log(req.file); // to see what is returned to you
 });
 
