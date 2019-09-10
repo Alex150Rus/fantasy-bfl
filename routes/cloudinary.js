@@ -4,9 +4,7 @@ const multer = require("multer");
 const cloudinaryStorage = require("multer-storage-cloudinary");
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
-
-const app = express();
-app.use(bodyParser.json());
+const router = express.Router();
 
 dotenv.config();
 cloudinary.config({ 
@@ -23,20 +21,16 @@ const storage = cloudinaryStorage({
   });
   const parser = multer({ storage: storage });
 
-app.get('/', function(req, res) {
+router.get('/', function(req, res) {
   res.send('<form method="post" enctype="multipart/form-data">'
     + '<p>Image: <input type="file" name="image"/></p>'
     + '<p><input type="submit"></p>'
     + '</form>');
 });
 
-app.post('/', parser.single("image"), (req, res) => {
- console.log; // to see what is returned to you
+router.post('/', parser.single("image"), (req, res) => {
+ console.log(req.file)
+ res.send(req.file.url); // to see what is returned to you
 });
 
-let port = process.env.PORT;
-if (port == null || port == "") {
-  port = 8000;
-}
-console.log(`server running at: http://localhost:${port}/`);
-app.listen(port);
+module.exports = router;

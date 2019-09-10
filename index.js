@@ -8,6 +8,7 @@ const teams = require('./routes/teams');
 const news = require('./routes/news');
 const results = require('./routes/results');
 const leagueTable = require('./routes/league-table');
+const cloudinary = require('./routes/cloudinary');
 
 const app = express();
 app.use(bodyParser.json());
@@ -20,6 +21,7 @@ app.use('/teams', teams);
 app.use('/news', news);
 app.use('/results', results);
 app.use('/league-table', leagueTable);
+app.use('/cloudinary', cloudinary);
 
 let port = process.env.PORT;
 if (port == null || port == "") {
@@ -27,4 +29,5 @@ if (port == null || port == "") {
 }
 console.log(`server running at: http://localhost:${port}/`);
 app.listen(port);
+
 
