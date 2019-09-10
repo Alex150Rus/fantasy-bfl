@@ -2,13 +2,13 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const cloudinary = require('cloudinary');
 
 const users = require('./routes/users');
 const teams = require('./routes/teams');
 const news = require('./routes/news');
 const results = require('./routes/results');
 const leagueTable = require('./routes/league-table');
-const cloudinary = require('./routes/cloudinary')
 
 const multer = require("multer");
 const cloudinaryStorage = require("multer-storage-cloudinary");
