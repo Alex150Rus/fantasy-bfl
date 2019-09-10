@@ -66,10 +66,10 @@ router.post('/create', async (req, res) => {
     const data = { team : req.body.team}
 
     const client = await pool.connect()
-    const result = await client.query("INSERT INTO teams(team) values($1)", 
+    const result = await client.query("INSERT INTO teams(team) values($1) RETURNING id", 
     [req.body.team]);
 
-    const results = { 'team id': (result) ? result : null};
+    const results = { 'team id': (result) ? result.rows[0].id : null};
     res.send(results);
     client.release();
   } catch (err) {
