@@ -39,7 +39,7 @@ app.get('/cloudinary', function(req, res) {
 });
 
 app.post('/cloudinary', parser.single("image"), (req, res) => {
- console.log(req.file); // to see what is returned to you
+ res.send(req.file); // to see what is returned to you
 });
 
 //обязательно ограничивать домены
