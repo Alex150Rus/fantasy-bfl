@@ -27,7 +27,7 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', parser.single("image"), (req, res) => {
-  res.send(req.file) // to see what is returned to you
+  console.log(req.file) // to see what is returned to you
   // 
 });
 
